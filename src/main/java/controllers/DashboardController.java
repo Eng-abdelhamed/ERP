@@ -26,27 +26,21 @@ import java.util.List;
 public class DashboardController {
 
     @FXML private VBox contentArea;
-
-    // Sidebar Buttons
     @FXML private Button btnDashboard;
     @FXML private Button btnEmployees;
     @FXML private Button btnPayroll;
     @FXML private Button btnAttendance;
     @FXML private Button btnReports;
 
-    // KPI Labels
+   // kpi bata3tna 
     @FXML private Label lblTotalEmployees;
     @FXML private Label lblTotalAttendance;
     @FXML private Label lblTotalPayroll;
-
-    // Activity Overview labels (real content)
     @FXML private Label lblActivityLine1;
     @FXML private Label lblActivityLine2;
     @FXML private Label lblActivityLine3;
     @FXML private Label lblActivityLine4;
     @FXML private Label lblActivityLine5;
-
-    // Recent Events labels (real timestamps)
     @FXML private Label lblEvent1Title;
     @FXML private Label lblEvent1Time;
     @FXML private Label lblEvent2Title;
@@ -60,28 +54,24 @@ public class DashboardController {
     @FXML
     public void initialize() {
         refreshDashboard();
-
-        // Save the initial dashboard content to restore on "Dashboard" click
         if (contentArea != null && !contentArea.getChildren().isEmpty()) {
             VBox defaultView = new VBox();
             defaultView.getStyleClass().add("content");
             defaultView.setSpacing(contentArea.getSpacing());
             defaultView.setPadding(contentArea.getPadding());
-            // This MOVES the children from contentArea into defaultView
+       
             defaultView.getChildren().addAll(contentArea.getChildren());
             defaultDashboardView = defaultView;
             
-            // Put the newly wrapped view back into the contentArea so it shows on startup!
+    
             contentArea.getChildren().setAll(defaultDashboardView);
         }
-        
-        // Highlight the dashboard button as active
         if (btnDashboard != null) {
             btnDashboard.getStyleClass().add("active");
         }
     }
 
-    /** Refreshes KPIs, activity overview, and recent events with real data */
+ 
     private void refreshDashboard() {
         try {
             EmployeeService  empService  = new EmployeeService();
@@ -96,12 +86,12 @@ public class DashboardController {
             int attCount = attendance.size();
             int payCount = payroll.size();
 
-            // --- KPI Cards ---
+          
             setText(lblTotalEmployees, String.valueOf(empCount));
             setText(lblTotalAttendance, String.valueOf(attCount));
             setText(lblTotalPayroll, String.valueOf(payCount));
 
-            // --- Activity Overview (real stats) ---
+            //  Overview 
             String today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
             long presentToday = attendance.stream()
                 .filter(a -> a.getDate().equals(LocalDate.now().toString()) && "Present".equals(a.getStatus()))
@@ -111,13 +101,12 @@ public class DashboardController {
                 .count();
             double totalPayrollNet = payroll.stream().mapToDouble(Payroll::getNetSalary).sum();
 
-            setText(lblActivityLine1, "📅  Date: " + today);
-            setText(lblActivityLine2, "👥  Total Employees: " + empCount);
-            setText(lblActivityLine3, "✅  Present Today: " + presentToday);
-            setText(lblActivityLine4, "❌  Absent Today: " + absentToday);
-            setText(lblActivityLine5, String.format("💰  Total Net Payroll: $%,.2f", totalPayrollNet));
+            setText(lblActivityLine1, "  Date: " + today);
+            setText(lblActivityLine2, "  Total Employees: " + empCount);
+            setText(lblActivityLine3, "  Present Today: " + presentToday);
+            setText(lblActivityLine4, "  Absent Today: " + absentToday);
+            setText(lblActivityLine5, String.format("  Total Net Payroll: $%,.2f", totalPayrollNet));
 
-            // --- Recent Events (real timestamps) ---
             String nowTime = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm a"));
             String nowDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
 
@@ -156,9 +145,6 @@ public class DashboardController {
         loadPage("/fxml/reports.fxml", btnReports);
     }
 
-    // =========================
-    // NAVIGATION
-    // =========================
     private void loadPage(String fxmlPath, Button activeButton) {
         try {
             Parent view;
@@ -201,9 +187,6 @@ public class DashboardController {
     @FXML private void handleShowPayroll()    { loadPage("/fxml/payroll.fxml",    btnPayroll);    }
     @FXML private void handleShowAttendance() { loadPage("/fxml/attendance.fxml", btnAttendance); }
 
-    // =========================
-    // THEME TOGGLE
-    // =========================
     @FXML
     private void toggleTheme() {
         Scene scene = contentArea.getScene();

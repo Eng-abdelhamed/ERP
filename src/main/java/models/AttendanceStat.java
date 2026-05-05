@@ -1,9 +1,4 @@
 package models;
-
-/**
- * A simple data holder (not persisted) used to display
- * per-employee attendance statistics in a TableView.
- */
 public class AttendanceStat {
     private String employeeId;
     private String employeeName;
@@ -25,8 +20,6 @@ public class AttendanceStat {
             this.percentage = "N/A";
         }
     }
-
-    // Getters (required by PropertyValueFactory)
     public String getEmployeeId()   { return employeeId;   }
     public String getEmployeeName() { return employeeName; }
     public int    getTotalDays()    { return totalDays;    }

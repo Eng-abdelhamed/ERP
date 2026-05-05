@@ -1,5 +1,4 @@
 package models;
-
 public class Payroll {
     private String employeeId;
     private double baseSalary;

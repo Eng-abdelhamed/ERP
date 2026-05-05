@@ -1,36 +1,29 @@
-/* =========================================================================
-   DESIGN TOKENS (LIGHT MODE)
-   ========================================================================= */
+
 .root {
     -fx-font-family: "Inter", "Segoe UI", sans-serif;
-    -fx-background-color: #f8fafc; /* Very light slate for modern feel */
+    -fx-background-color: #f8fafc; 
 
-    /* Colors */
+
     -color-bg: #f8fafc;
     -color-card: #ffffff;
     
-    /* Brand Accent (Indigo) */
+  
     -color-primary: #4f46e5;
     -color-primary-hover: #4338ca;
     -color-primary-muted: #e0e7ff;
     
-    /* Text */
+
     -color-text-main: #0f172a;
     -color-text-muted: #64748b;
     
-    /* Borders & States */
     -color-border: #e2e8f0;
     -color-hover: #f1f5f9;
-    
-    /* Status Colors */
+   
     -color-success: #10b981;
     -color-danger: #ef4444;
     -color-danger-hover: #dc2626;
 }
 
-/* =========================================================================
-   TYPOGRAPHY
-   ========================================================================= */
 .title {
     -fx-font-size: 18px;
     -fx-font-weight: 800;
@@ -72,9 +65,6 @@
     -fx-font-size: 13px;
 }
 
-/* =========================================================================
-   LAYOUT & CONTAINERS
-   ========================================================================= */
 .topbar {
     -fx-background-color: -color-card;
     -fx-border-color: transparent transparent -color-border transparent;
@@ -94,7 +84,6 @@
     -fx-padding: 10 0 5 10;
 }
 
-/* Modern Card System */
 .card {
     -fx-background-color: -color-card;
     -fx-background-radius: 12;
@@ -130,10 +119,6 @@
     -fx-padding: 5 0;
 }
 
-/* =========================================================================
-   CONTROLS (BUTTONS, INPUTS)
-   ========================================================================= */
-/* Sidebar Buttons */
 .side-btn {
     -fx-background-color: transparent;
     -fx-text-fill: -color-text-muted;
@@ -156,7 +141,6 @@
     -fx-font-weight: 600;
 }
 
-/* Standard Buttons */
 .button {
     -fx-cursor: hand;
     -fx-background-radius: 8;
@@ -227,9 +211,6 @@
     -fx-prompt-text-fill: #94a3b8;
 }
 
-/* =========================================================================
-   TABLES
-   ========================================================================= */
 .table-view {
     -fx-background-color: transparent;
     -fx-border-color: -color-border;
@@ -284,10 +265,6 @@
     -fx-font-size: 14px;
 }
 
-/* =========================================================================
-   SPECIAL COMPONENTS
-   ========================================================================= */
-/* Payroll Result Card */
 .result-card {
     -fx-background-color: -color-primary-muted;
     -fx-border-color: transparent;
@@ -306,7 +283,6 @@
     -fx-text-fill: -color-text-main;
 }
 
-/* Payroll breakdown panel - uses token so dark mode works */
 .breakdown-panel {
     -fx-background-color: -color-hover;
     -fx-background-radius: 8;

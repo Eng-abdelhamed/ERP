@@ -25,16 +25,10 @@ public class Employee {
     public void setPosition(String position) { this.position = position; }
     public void setSalary(double salary) { this.salary = salary; }
 
-    /**
-     * Formats the employee data for saving to a CSV/TXT file.
-     */
     public String toCsv() {
         return id + "," + name + "," + position + "," + salary;
     }
 
-    /**
-     * Creates an Employee object from a CSV string.
-     */
     public static Employee fromCsv(String csvLine) {
         String[] parts = csvLine.split(",");
         if (parts.length == 4) {

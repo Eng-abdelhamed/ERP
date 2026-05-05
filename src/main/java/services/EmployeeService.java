@@ -1,8 +1,6 @@
 package services;
-
 import models.Employee;
 import utils.FileUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,6 @@ public class EmployeeService {
         return employees;
     }
 
-    /** Generates the next unique ID like EMP-001, EMP-002 ... */
     public String generateNextId() {
         int maxNum = 0;
         for (Employee emp : employees) {
