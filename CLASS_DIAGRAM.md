@@ -4,4 +4,4 @@ This document contains the professional UML Class Diagram for the Employee Manag
 
 ## PlantUML Code
 
-![Architecture](ERP_uml.png)
+![Architecture](uml_ERP.png)
