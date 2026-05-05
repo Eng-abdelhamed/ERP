@@ -87,3 +87,4 @@ To keep the application lightweight and demonstrate Java file I/O streams, data 
 * `payroll.txt`: Stores `EmployeeID,Base,Bonus,Deductions,Net`
 
 When the application starts, the Services read these text files, parse the lines back into Java Objects (Models), and load them into memory. When a user adds or edits data, the Service updates the objects in memory and overwrites the text file to save the changes permanently.
+![Architecture](uml_ERP.png)
