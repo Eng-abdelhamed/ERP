@@ -1,4 +1,4 @@
-# JavaFX ERP System
+# ERP System
 
 A lightweight, object-oriented Enterprise Resource Planning (ERP) desktop application built with Java, JavaFX, and File-based Data Persistence. This application is designed to manage Employees, track Daily Attendance, and process Payroll cleanly and efficiently.
 
