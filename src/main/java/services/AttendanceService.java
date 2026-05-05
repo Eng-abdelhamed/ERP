@@ -1,8 +1,6 @@
 package services;
-
 import models.Attendance;
 import utils.FileUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +33,6 @@ public class AttendanceService {
         saveToFile();
     }
 
-    /**
-     * Checks if an attendance record already exists for a given employee on a given date.
-     * Prevents duplicate daily entries.
-     */
     public boolean hasDuplicateEntry(String employeeId, String date) {
         for (Attendance att : records) {
             if (att.getEmployeeId().equals(employeeId) && att.getDate().equals(date)) {
@@ -48,9 +42,6 @@ public class AttendanceService {
         return false;
     }
 
-    /**
-     * Counts how many days the employee was "Present".
-     */
     public int countPresent(String employeeId) {
         int count = 0;
         for (Attendance att : records) {
@@ -61,9 +52,7 @@ public class AttendanceService {
         return count;
     }
 
-    /**
-     * Counts the total number of logged days for an employee (any status).
-     */
+
     public int countTotal(String employeeId) {
         int count = 0;
         for (Attendance att : records) {
