@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.ReportsController"
+      spacing="20"
+      style="-fx-background-color: transparent;">
+
+    <padding>
+        <Insets top="28" right="40" bottom="28" left="40"/>
+    </padding>
+
+    <!-- HEADER -->
+    <HBox alignment="CENTER_LEFT">
+        <VBox spacing="4">
+            <Label text="Reports &amp; Analytics" styleClass="page-title"/>
+            <Label text="Visualize your data and export it to PDF." styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="cmbReportType" promptText="Select Report Type" styleClass="combo-box" style="-fx-pref-width: 200;"/>
+        <Button text="Generate PDF Report" styleClass="btn-primary"
+                onAction="#handleGeneratePdf"
+                style="-fx-padding: 8 16; -fx-font-size: 13px; -fx-margin-left: 10px;"/>
+    </HBox>
+
+    <Label fx:id="lblStatus" styleClass="status" alignment="CENTER" maxWidth="Infinity"/>
+
+    <!-- MAIN BODY: Charts Area -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+
+        <!-- ===== Left Panel: Pie Chart (Attendance) ===== -->
+        <VBox styleClass="card" spacing="18" HBox.hgrow="ALWAYS">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+            <Label fx:id="lblChartLeftTitle" text="Attendance Overview" styleClass="card-title"/>
+            
+            <StackPane fx:id="chartPaneLeft" VBox.vgrow="ALWAYS">
+                <PieChart fx:id="attendancePieChart" legendSide="BOTTOM" labelsVisible="true"/>
+            </StackPane>
+        </VBox>
+
+        <!-- ===== Right Panel: Bar Chart (Payroll) ===== -->
+        <VBox styleClass="card" spacing="18" HBox.hgrow="ALWAYS">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+            <Label fx:id="lblChartRightTitle" text="Payroll Breakdown" styleClass="card-title"/>
+            
+            <StackPane fx:id="chartPaneRight" VBox.vgrow="ALWAYS">
+                <BarChart fx:id="payrollBarChart" legendSide="BOTTOM">
+                    <xAxis>
+                        <CategoryAxis label="Employees" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Amount ($)" />
+                    </yAxis>
+                </BarChart>
+            </StackPane>
+        </VBox>
+
+    </HBox>
+
+</VBox>

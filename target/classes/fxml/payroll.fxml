@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.PayrollController"
+      spacing="24"
+      style="-fx-background-color: transparent;">
+
+    <padding><Insets top="32" right="40" bottom="32" left="40"/></padding>
+
+    <!-- SCREEN HEADER -->
+    <HBox alignment="CENTER_LEFT">
+        <VBox spacing="4">
+            <Label text="Payroll Processing" styleClass="page-title"/>
+            <Label text="Calculate net salary including taxes, bonuses, and deductions." styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <HBox spacing="24" VBox.vgrow="ALWAYS">
+
+        <!-- LEFT: INPUT CARD -->
+        <VBox styleClass="card" spacing="20" HBox.hgrow="ALWAYS">
+            <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+
+            <Label text="Employee &amp; Pay Period" styleClass="card-title"/>
+
+            <GridPane hgap="20" vgap="16">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
+                </columnConstraints>
+
+                <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Employee ID" styleClass="form-label"/>
+                    <TextField fx:id="txtPayrollEmployeeId" promptText="e.g. EMP-001" styleClass="text-field"
+                               onAction="#handleLookupEmployee"/>
+                </VBox>
+
+                <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Employee Name" styleClass="form-label"/>
+                    <!-- Auto-filled after ID lookup -->
+                    <TextField fx:id="txtEmpName" promptText="Auto-filled from ID" styleClass="text-field"
+                               editable="false" style="-fx-opacity: 0.75;"/>
+                </VBox>
+
+                <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Pay Period" styleClass="form-label"/>
+                    <ComboBox fx:id="cmbPayPeriod" maxWidth="Infinity" styleClass="combo-box" promptText="Select period..."/>
+                </VBox>
+
+                <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Tax Rate (%)" styleClass="form-label"/>
+                    <TextField fx:id="txtTaxRate" promptText="e.g. 15" styleClass="text-field" text="15"/>
+                </VBox>
+            </GridPane>
+
+            <Separator styleClass="section-separator"/>
+            <Label text="Salary Components" styleClass="card-title"/>
+
+            <GridPane hgap="20" vgap="16">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50"/>
+                    <ColumnConstraints percentWidth="50"/>
+                </columnConstraints>
+
+                <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Base Salary ($)" styleClass="form-label"/>
+                    <TextField fx:id="txtBaseSalary" promptText="0.00" styleClass="text-field"/>
+                </VBox>
+
+                <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Overtime Pay ($)" styleClass="form-label"/>
+                    <TextField fx:id="txtOvertime" promptText="0.00" styleClass="text-field"/>
+                </VBox>
+
+                <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Performance Bonus ($)" styleClass="form-label"/>
+                    <TextField fx:id="txtBonus" promptText="0.00" styleClass="text-field"/>
+                </VBox>
+
+                <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Other Deductions ($)" styleClass="form-label"/>
+                    <TextField fx:id="txtDeductions" promptText="0.00" styleClass="text-field"/>
+                </VBox>
+            </GridPane>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Separator styleClass="section-separator"/>
+
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button text="Lookup Employee" styleClass="btn-secondary" onAction="#handleLookupEmployee"/>
+                <Button text="Calculate &amp; Save" styleClass="btn-primary" onAction="#handleCalculateNetSalary"/>
+                <Button text="Reset" styleClass="btn-ghost" onAction="#handleResetPayroll"/>
+            </HBox>
+        </VBox>
+
+        <!-- RIGHT: RESULT CARD -->
+        <VBox spacing="16" prefWidth="380">
+
+            <!-- Net Result -->
+            <VBox styleClass="card, result-card" spacing="12" alignment="CENTER">
+                <padding><Insets top="32" right="28" bottom="32" left="28"/></padding>
+                <Label text="NET SALARY" styleClass="result-label-heading"/>
+                <Label fx:id="lblNetSalaryResult" text="\$0.00" styleClass="result-amount"/>
+                <Label fx:id="lblPayrollStatus" text="" styleClass="status-label"/>
+            </VBox>
+
+            <!-- Breakdown Card -->
+            <VBox styleClass="card" spacing="14">
+                <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+                <Label text="Salary Breakdown" styleClass="card-title"/>
+
+                <HBox><Label text="Base Salary"    style="-fx-text-fill: -color-text-muted;"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="lblBreakBase"       text="\$0.00" style="-fx-font-weight: 700; -fx-text-fill: -color-text-main;"/></HBox>
+                <HBox><Label text="Overtime Pay"   style="-fx-text-fill: -color-text-muted;"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="lblBreakOvertime"   text="\$0.00" style="-fx-font-weight: 700; -fx-text-fill: -color-success;"/></HBox>
+                <HBox><Label text="Bonus"          style="-fx-text-fill: -color-text-muted;"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="lblBreakBonus"      text="\$0.00" style="-fx-font-weight: 700; -fx-text-fill: -color-success;"/></HBox>
+                <Separator/>
+                <HBox><Label text="Gross Salary"   style="-fx-font-weight: 700; -fx-text-fill: -color-text-main;"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="lblBreakGross"    text="\$0.00" style="-fx-font-weight: 800; -fx-text-fill: -color-primary;"/></HBox>
+                <Separator/>
+                <HBox><Label text="Tax Withheld"   style="-fx-text-fill: -color-text-muted;"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="lblBreakTax"        text="\$0.00" style="-fx-font-weight: 700; -fx-text-fill: -color-danger;"/></HBox>
+                <HBox><Label text="Deductions"     style="-fx-text-fill: -color-text-muted;"/><Region HBox.hgrow="ALWAYS"/><Label fx:id="lblBreakDeductions" text="\$0.00" style="-fx-font-weight: 700; -fx-text-fill: -color-danger;"/></HBox>
+            </VBox>
+
+        </VBox>
+
+    </HBox>
+
+</VBox>

@@ -1,0 +1,314 @@
+/* =========================================================================
+   DESIGN TOKENS (LIGHT MODE)
+   ========================================================================= */
+.root {
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
+    -fx-background-color: #f8fafc; /* Very light slate for modern feel */
+
+    /* Colors */
+    -color-bg: #f8fafc;
+    -color-card: #ffffff;
+    
+    /* Brand Accent (Indigo) */
+    -color-primary: #4f46e5;
+    -color-primary-hover: #4338ca;
+    -color-primary-muted: #e0e7ff;
+    
+    /* Text */
+    -color-text-main: #0f172a;
+    -color-text-muted: #64748b;
+    
+    /* Borders & States */
+    -color-border: #e2e8f0;
+    -color-hover: #f1f5f9;
+    
+    /* Status Colors */
+    -color-success: #10b981;
+    -color-danger: #ef4444;
+    -color-danger-hover: #dc2626;
+}
+
+/* =========================================================================
+   TYPOGRAPHY
+   ========================================================================= */
+.title {
+    -fx-font-size: 18px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -color-text-main;
+}
+
+.logo {
+    -fx-font-size: 22px;
+    -fx-text-fill: -color-primary;
+}
+
+.page-title, .screen-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -color-text-main;
+}
+
+.page-subtitle, .screen-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: -color-text-muted;
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -color-text-main;
+    -fx-padding: 0 0 10 0;
+}
+
+.form-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -color-text-main;
+}
+
+.status-label, .status {
+    -fx-text-fill: -color-success;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+}
+
+/* =========================================================================
+   LAYOUT & CONTAINERS
+   ========================================================================= */
+.topbar {
+    -fx-background-color: -color-card;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.sidebar {
+    -fx-background-color: -color-card;
+    -fx-border-color: transparent -color-border transparent transparent;
+    -fx-border-width: 0 1 0 0;
+}
+
+.menu-title {
+    -fx-font-size: 11px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -color-text-muted;
+    -fx-padding: 10 0 5 10;
+}
+
+/* Modern Card System */
+.card {
+    -fx-background-color: -color-card;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.03), 10, 0, 0, 4);
+}
+
+.stat-card {
+    -fx-background-color: -color-card;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: -color-border;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.02), 8, 0, 0, 2);
+}
+
+.stat-title {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-muted;
+    -fx-font-weight: 600;
+}
+
+.stat-value {
+    -fx-font-size: 28px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -color-text-main;
+}
+
+.section-separator {
+    -fx-padding: 5 0;
+}
+
+/* =========================================================================
+   CONTROLS (BUTTONS, INPUTS)
+   ========================================================================= */
+/* Sidebar Buttons */
+.side-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-muted;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 14;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-cursor: hand;
+}
+
+.side-btn:hover {
+    -fx-background-color: -color-hover;
+    -fx-text-fill: -color-text-main;
+}
+
+.side-btn.active {
+    -fx-background-color: -color-primary-muted;
+    -fx-text-fill: -color-primary;
+    -fx-font-weight: 600;
+}
+
+/* Standard Buttons */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+    -fx-padding: 9 16;
+}
+
+.btn-primary {
+    -fx-background-color: -color-primary;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(79,70,229,0.3), 8, 0, 0, 2);
+}
+
+.btn-primary:hover {
+    -fx-background-color: -color-primary-hover;
+}
+
+.btn-secondary {
+    -fx-background-color: -color-card;
+    -fx-text-fill: -color-text-main;
+    -fx-border-color: -color-border;
+    -fx-border-radius: 8;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -color-hover;
+}
+
+.btn-danger {
+    -fx-background-color: -color-danger;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.3), 8, 0, 0, 2);
+}
+
+.btn-danger:hover {
+    -fx-background-color: -color-danger-hover;
+}
+
+.btn-ghost {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-muted;
+}
+
+.btn-ghost:hover {
+    -fx-background-color: -color-hover;
+    -fx-text-fill: -color-text-main;
+}
+
+/* Inputs */
+.text-field, .combo-box, .date-picker {
+    -fx-background-color: -color-card;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: -color-border;
+    -fx-padding: 8 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-main;
+}
+
+.text-field:focused, .combo-box:focused, .date-picker:focused {
+    -fx-border-color: -color-primary;
+    -fx-effect: dropshadow(gaussian, rgba(79,70,229,0.2), 4, 0, 0, 0);
+}
+
+.text-field:empty {
+    -fx-prompt-text-fill: #94a3b8;
+}
+
+/* =========================================================================
+   TABLES
+   ========================================================================= */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: -color-border;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -color-hover;
+    -fx-background-radius: 8 8 0 0;
+    -fx-border-color: transparent transparent -color-border transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -color-text-muted;
+    -fx-font-weight: 600;
+    -fx-font-size: 12px;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -color-border transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-cell-size: 44px;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: -color-hover;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -color-primary-muted;
+}
+
+.table-view .cell {
+    -fx-text-fill: -color-text-main;
+    -fx-font-size: 13px;
+}
+
+.table-placeholder .label {
+    -fx-text-fill: -color-text-muted;
+    -fx-font-size: 14px;
+}
+
+/* =========================================================================
+   SPECIAL COMPONENTS
+   ========================================================================= */
+/* Payroll Result Card */
+.result-card {
+    -fx-background-color: -color-primary-muted;
+    -fx-border-color: transparent;
+}
+
+.result-label-heading {
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-text-fill: -color-primary;
+    -fx-letter-spacing: 1px;
+}
+
+.result-amount {
+    -fx-font-size: 48px;
+    -fx-font-weight: 800;
+    -fx-text-fill: -color-text-main;
+}
+
+/* Payroll breakdown panel - uses token so dark mode works */
+.breakdown-panel {
+    -fx-background-color: -color-hover;
+    -fx-background-radius: 8;
+    -fx-padding: 16;
+}

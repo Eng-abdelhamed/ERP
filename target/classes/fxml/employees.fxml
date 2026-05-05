@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.EmployeeController"
+      spacing="24"
+      style="-fx-background-color: transparent;">
+
+    <padding><Insets top="32" right="40" bottom="32" left="40"/></padding>
+
+    <!-- SCREEN HEADER -->
+    <HBox alignment="CENTER_LEFT">
+        <VBox spacing="4">
+            <Label text="Employees" styleClass="page-title"/>
+            <Label text="Manage your workforce records and details." styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <!-- "Add New Employee" opens a dialog popup, NOT the inline form -->
+        <Button text="+ Add New Employee" styleClass="btn-primary" onAction="#handleOpenAddDialog"/>
+    </HBox>
+
+    <!-- EDIT FORM CARD (shown only when an employee is selected from the table) -->
+    <VBox styleClass="card" spacing="20">
+        <padding><Insets top="24" right="28" bottom="24" left="28"/></padding>
+
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Edit Employee" styleClass="card-title" style="-fx-padding: 0;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <!-- Auto-generated, read-only ID display -->
+            <Label fx:id="lblCurrentId" text="" style="-fx-text-fill: -color-text-muted; -fx-font-size: 12px;"/>
+        </HBox>
+
+        <GridPane hgap="24" vgap="16">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="Full Name" styleClass="form-label"/>
+                <TextField fx:id="txtName" promptText="e.g. Jane Doe" styleClass="text-field"/>
+            </VBox>
+
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="Position" styleClass="form-label"/>
+                <TextField fx:id="txtPosition" promptText="e.g. Software Engineer" styleClass="text-field"/>
+            </VBox>
+
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="Base Salary ($)" styleClass="form-label"/>
+                <TextField fx:id="txtSalary" promptText="e.g. 75000.00" styleClass="text-field"/>
+            </VBox>
+        </GridPane>
+
+        <Separator styleClass="section-separator"/>
+
+        <!-- ACTION BUTTONS -->
+        <HBox spacing="12" alignment="CENTER_LEFT">
+            <Button text="Save Changes" styleClass="btn-secondary" onAction="#handleUpdateEmployee"/>
+            <Button text="Delete Employee" styleClass="btn-danger" onAction="#handleDeleteEmployee"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblStatus" styleClass="status-label" text=""/>
+            <Button text="Clear Selection" styleClass="btn-ghost" onAction="#handleClearForm"/>
+        </HBox>
+    </VBox>
+
+    <!-- TABLE CARD -->
+    <VBox styleClass="card" spacing="16" VBox.vgrow="ALWAYS">
+        <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <Label text="Employee Directory" styleClass="card-title" style="-fx-padding: 0;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <!-- ✅ Search field with fx:id wired to controller -->
+            <TextField fx:id="txtSearch"
+                       promptText="Search by name or ID..."
+                       style="-fx-pref-width: 240;"
+                       styleClass="text-field"/>
+        </HBox>
+
+        <TableView fx:id="employeeTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colId"       text="ID"       prefWidth="120"/>
+                <TableColumn fx:id="colName"     text="Name"     prefWidth="220"/>
+                <TableColumn fx:id="colPosition" text="Position" prefWidth="220"/>
+                <TableColumn fx:id="colSalary"   text="Salary"   prefWidth="140"/>
+            </columns>
+            <placeholder>
+                <VBox alignment="CENTER" spacing="8">
+                    <Label text="No employees found" styleClass="table-placeholder"/>
+                    <Label text="Click '+ Add New Employee' to get started." style="-fx-text-fill: -color-text-muted; -fx-font-size: 12px;"/>
+                </VBox>
+            </placeholder>
+        </TableView>
+    </VBox>
+
+</VBox>

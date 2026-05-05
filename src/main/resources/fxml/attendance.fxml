@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.AttendanceController"
+      spacing="20"
+      style="-fx-background-color: transparent;">
+
+    <padding>
+        <Insets top="28" right="40" bottom="28" left="40"/>
+    </padding>
+
+    <!-- HEADER -->
+    <HBox alignment="CENTER_LEFT">
+        <VBox spacing="4">
+            <Label text="Attendance Tracking" styleClass="page-title"/>
+            <Label text="Log daily presence for registered employees only." styleClass="page-subtitle"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Export CSV" styleClass="btn-secondary"
+                onAction="#handleExportCsv"
+                style="-fx-padding: 8 16; -fx-font-size: 13px;"/>
+    </HBox>
+
+    <!-- MAIN BODY: Form (left) + Tables (right) -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+
+        <!-- ===== LOG FORM CARD (LEFT) ===== -->
+        <VBox styleClass="card" spacing="18" prefWidth="320">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+            <Label text="Log Attendance" styleClass="card-title"/>
+
+            <!-- Employee Selector - populated from registered employees only -->
+            <VBox spacing="6">
+                <Label text="Select Employee" styleClass="form-label"/>
+                <ComboBox fx:id="cmbEmployee" maxWidth="Infinity" styleClass="combo-box"
+                          promptText="Choose employee..."/>
+            </VBox>
+
+            <!-- Date Picker (auto-set to today) -->
+            <VBox spacing="6">
+                <Label text="Date" styleClass="form-label"/>
+                <DatePicker fx:id="datePicker" maxWidth="Infinity" styleClass="date-picker"/>
+            </VBox>
+
+            <!-- Status -->
+            <VBox spacing="6">
+                <Label text="Status" styleClass="form-label"/>
+                <ComboBox fx:id="cmbStatus" maxWidth="Infinity" styleClass="combo-box"
+                          promptText="Select status..."/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Separator styleClass="section-separator"/>
+
+            <VBox spacing="10">
+                <Button text="Save Attendance" styleClass="btn-primary" maxWidth="Infinity"
+                        onAction="#handleMarkAttendance"/>
+                <Button text="Update Attendance" styleClass="btn-secondary" maxWidth="Infinity"
+                        onAction="#handleUpdateAttendance"/>
+                <Button text="Clear Form" styleClass="btn-ghost" maxWidth="Infinity"
+                        onAction="#handleClearAttendance"/>
+                <Label fx:id="lblAttendanceStatus" styleClass="status"
+                       alignment="CENTER" maxWidth="Infinity" wrapText="true"/>
+            </VBox>
+        </VBox>
+
+        <!-- ===== RIGHT PANEL: Stacked Records + Stats ===== -->
+        <VBox spacing="20" HBox.hgrow="ALWAYS">
+
+            <!-- ATTENDANCE LOGS TABLE -->
+            <VBox styleClass="card" spacing="12" VBox.vgrow="ALWAYS">
+                <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Daily Attendance Log" styleClass="card-title" style="-fx-padding: 0;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <!-- Filter by date -->
+                    <TextField fx:id="txtDateFilter"
+                               promptText="Filter by date (YYYY-MM-DD)..."
+                               style="-fx-pref-width: 210;" styleClass="text-field"/>
+                </HBox>
+
+                <TableView fx:id="attendanceTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colAttEmpId"  text="Employee ID"   prefWidth="120"/>
+                        <TableColumn fx:id="colAttName"   text="Name"          prefWidth="170"/>
+                        <TableColumn fx:id="colAttDate"   text="Date"          prefWidth="130"/>
+                        <TableColumn fx:id="colAttStatus" text="Status"        prefWidth="110"/>
+                    </columns>
+                    <placeholder>
+                        <VBox alignment="CENTER" spacing="8">
+                            <Label text="No records found" styleClass="table-placeholder"/>
+                            <Label text="Use the form to log attendance."
+                                   style="-fx-text-fill: -color-text-muted; -fx-font-size: 12px;"/>
+                        </VBox>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <!-- ATTENDANCE PERCENTAGE STATS TABLE -->
+            <VBox styleClass="card" spacing="12" prefHeight="220">
+                <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="Employee Attendance Rate" styleClass="card-title" style="-fx-padding: 0;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="↻ Refresh" styleClass="btn-ghost"
+                            style="-fx-font-size: 12px; -fx-padding: 5 10;"
+                            onAction="#handleRefreshStats"/>
+                </HBox>
+
+                <TableView fx:id="statsTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colStatId"         text="ID"          prefWidth="100"/>
+                        <TableColumn fx:id="colStatName"       text="Employee"     prefWidth="170"/>
+                        <TableColumn fx:id="colStatTotal"      text="Days Logged"  prefWidth="110"/>
+                        <TableColumn fx:id="colStatPresent"    text="Present"      prefWidth="90"/>
+                        <TableColumn fx:id="colStatPercentage" text="Attendance %"  prefWidth="110"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No statistics yet." style="-fx-text-fill: -color-text-muted;"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+        </VBox>
+
+    </HBox>
+
+</VBox>
