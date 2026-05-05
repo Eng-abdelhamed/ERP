@@ -6,6 +6,6 @@ module com.erp {
 
     opens com.erp to javafx.graphics, javafx.fxml;
     opens controllers to javafx.fxml;
-    opens models to javafx.base; // Required for TableView PropertyValueFactory
+    opens models to javafx.base; 
     opens services to javafx.base;
 }
