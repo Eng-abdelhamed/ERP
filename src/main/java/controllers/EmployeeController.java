@@ -50,8 +50,6 @@ public class EmployeeController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
-        
-        // Format the salary column with commas
         colSalary.setCellFactory(col -> new TableCell<Employee, Double>() {
             @Override
             protected void updateItem(Double item, boolean empty) {
@@ -65,8 +63,6 @@ public class EmployeeController {
         });
 
         employeeTable.setItems(filteredData);
-
-        // ✅ SEARCH: live filter by name OR id
         txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
             String filter = newVal == null ? "" : newVal.toLowerCase().trim();
             filteredData.setPredicate(emp -> {
@@ -75,8 +71,6 @@ public class EmployeeController {
                     || emp.getId().toLowerCase().contains(filter);
             });
         });
-
-        // Row click → fill edit form
         employeeTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 selectedEmployee = newSel;
@@ -88,7 +82,6 @@ public class EmployeeController {
         });
     }
 
-    /** ✅ Opens a themed modal dialog to add a new employee */
     @FXML
     private void handleOpenAddDialog() {
         String newId = employeeService.generateNextId();
@@ -98,7 +91,7 @@ public class EmployeeController {
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
 
-        // --- Form fields ---
+      
         TextField nameField = new TextField();
         nameField.setPromptText("e.g. Jane Doe");
 
@@ -114,7 +107,7 @@ public class EmployeeController {
         Button saveBtn = new Button("Add Employee");
         Button cancelBtn = new Button("Cancel");
 
-        // --- Layout ---
+     
         GridPane grid = new GridPane();
         grid.setHgap(12);
         grid.setVgap(14);
