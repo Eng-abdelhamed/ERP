@@ -52,15 +52,11 @@ public class ReportsController {
         cmbReportType.valueProperty().addListener((obs, oldVal, newVal) -> {
             updateCharts();
         });
-
-        // Add a bit of spacing hack via CSS dynamically if needed, but styling is in FXML
         updateCharts();
     }
 
     private void updateCharts() {
         lblStatus.setText("");
-
-        // 1. Populate Attendance Pie Chart
         List<Attendance> attendanceList = attendanceService.getAllRecords();
         long presentCount = attendanceList.stream().filter(a -> "Present".equals(a.getStatus())).count();
         long absentCount = attendanceList.stream().filter(a -> "Absent".equals(a.getStatus())).count();
@@ -70,8 +66,6 @@ public class ReportsController {
             new PieChart.Data("Absent (" + absentCount + ")", absentCount)
         );
         attendancePieChart.setData(pieData);
-
-        // 2. Populate Payroll Bar Chart
         List<Payroll> payrollList = payrollService.getAllRecords();
         XYChart.Series<String, Number> seriesGross = new XYChart.Series<>();
         seriesGross.setName("Gross Salary");
@@ -132,12 +126,12 @@ public class ReportsController {
     }
 
     private void showError(String msg) {
-        lblStatus.setText("⚠ " + msg);
+        lblStatus.setText(" " + msg);
         lblStatus.setStyle("-fx-text-fill: -color-danger; -fx-padding: 10px;");
     }
 
     private void showSuccess(String msg) {
-        lblStatus.setText("✓ " + msg);
+        lblStatus.setText(" " + msg);
         lblStatus.setStyle("-fx-text-fill: -color-success; -fx-padding: 10px;");
     }
 }
