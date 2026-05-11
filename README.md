@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# JavaFX ERP System
-
-=======
 # ERP System
 ![Architecture](uml_ERP.png)
 >>>>>>> 2068560250b17581347720c4b482b459e29db304
