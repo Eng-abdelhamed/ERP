@@ -13,7 +13,7 @@ import java.util.List;
 public class PayrollController {
 
     @FXML private TextField txtPayrollEmployeeId;
-    @FXML private TextField txtEmpName;      
+    @FXML private TextField txtEmpName;      // auto-filled
     @FXML private TextField txtBaseSalary;
     @FXML private TextField txtOvertime;
     @FXML private TextField txtBonus;
@@ -39,6 +39,8 @@ public class PayrollController {
     public void initialize() {
         employeeService = new EmployeeService();
         payrollService  = new PayrollService();
+
+        // Populate pay period options using the current year dynamically
         int currentYear = java.time.LocalDate.now().getYear();
         cmbPayPeriod.setItems(FXCollections.observableArrayList(
             "January " + currentYear,  "February " + currentYear, "March " + currentYear,
@@ -47,6 +49,8 @@ public class PayrollController {
             "October " + currentYear,  "November " + currentYear,  "December " + currentYear
         ));
     }
+
+    /** Looks up an employee by ID and auto-fills name + salary fields */
     @FXML
     private void handleLookupEmployee() {
         String id = txtPayrollEmployeeId.getText().trim();
@@ -88,17 +92,17 @@ public class PayrollController {
             double overtime   = parseOrZero(txtOvertime.getText());
             double bonus      = parseOrZero(txtBonus.getText());
             double deductions = parseOrZero(txtDeductions.getText());
-            double taxRate    = parseOrZero(txtTaxRate.getText()); 
+            double taxRate    = parseOrZero(txtTaxRate.getText()); // percentage
 
-         
+            // Calculation logic
             double gross       = base + overtime + bonus;
             double taxAmount   = gross * (taxRate / 100.0);
             double net         = gross - taxAmount - deductions;
 
-         
+            // Update result with commas for thousands
             lblNetSalaryResult.setText(String.format("$%,.2f", net));
 
-      
+            // Update breakdown labels with commas
             lblBreakBase.setText(String.format("$%,.2f", base));
             lblBreakOvertime.setText(String.format("$%,.2f", overtime));
             lblBreakBonus.setText(String.format("$%,.2f", bonus));
@@ -106,7 +110,7 @@ public class PayrollController {
             lblBreakTax.setText(String.format("-$%,.2f", taxAmount));
             lblBreakDeductions.setText(String.format("-$%,.2f", deductions));
 
-       
+            // Save to payroll records
             Payroll record = new Payroll(empId, base, bonus, deductions, net);
             payrollService.addPayroll(record);
 

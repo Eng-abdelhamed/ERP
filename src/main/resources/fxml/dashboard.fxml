@@ -25,7 +25,7 @@
             </padding>
 
             <!-- Brand -->
-            <Label text="✦" styleClass="logo"/>
+            <Label text="" styleClass="logo"/>
             <Label text="ERP SYSTEM" styleClass="title"/>
             
             <!-- Spacer -->
@@ -53,7 +53,7 @@
 
             <Label text="OVERVIEW" styleClass="menu-title"/>
 
-            <Button text="  📊 Dashboard"
+            <Button text="   Dashboard"
                     fx:id="btnDashboard"
                     onAction="#handleShowDashboard"
                     maxWidth="Infinity"

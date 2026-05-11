@@ -6,6 +6,7 @@ public class Employee {
     private String position;
     private double salary;
 
+//    Constructor
     public Employee(String id, String name, String position, double salary) {
         this.id = id;
         this.name = name;
@@ -25,10 +26,14 @@ public class Employee {
     public void setPosition(String position) { this.position = position; }
     public void setSalary(double salary) { this.salary = salary; }
 
+    // EMP-001,Ahmed,Developer,12000
     public String toCsv() {
         return id + "," + name + "," + position + "," + salary;
     }
 
+    
+//    creates an Employee object from a CSV string.
+//     string to object
     public static Employee fromCsv(String csvLine) {
         String[] parts = csvLine.split(",");
         if (parts.length == 4) {

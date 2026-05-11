@@ -1,30 +1,37 @@
-
+/* =========================================================================
+   DESIGN TOKENS (DARK MODE OVERRIDES)
+   ========================================================================= */
 .root {
     -fx-background-color: #0f172a;
 
-   
+    /* Colors */
     -color-bg: #0f172a;
     -color-card: #1e293b;
 
-    
+    /* Brand Accent (Indigo) */
     -color-primary: #6366f1;
     -color-primary-hover: #4f46e5;
     -color-primary-muted: rgba(99, 102, 241, 0.15);
 
- 
+    /* Text */
     -color-text-main: #f8fafc;
     -color-text-muted: #94a3b8;
 
-  
+    /* Borders & States */
     -color-border: #334155;
     -color-hover: #334155;
 }
 
+/* =========================================================================
+   COMPONENT OVERRIDES
+   ========================================================================= */
+
+/* Cards */
 .card, .stat-card {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);
 }
 
-
+/* ScrollPane - must be transparent in dark mode too */
 .scroll-pane {
     -fx-background-color: transparent;
 }
@@ -32,17 +39,17 @@
     -fx-background-color: transparent;
 }
 
-
+/* Inputs: inner text area must also be styled */
 .text-field .content, .text-field:focused .content {
     -fx-background-color: #1e293b;
 }
 
-
+/* Table: fix default alternating rows which ignore our vars */
 .table-view .table-row-cell {
     -fx-background-color: transparent;
 }
 
-
+/* ComboBox popup */
 .combo-box-popup .list-view {
     -fx-background-color: #1e293b;
     -fx-border-color: #334155;
@@ -55,44 +62,44 @@
     -fx-background-color: #334155;
 }
 
-
+/* DatePicker popup */
 .date-picker-popup {
     -fx-background-color: #1e293b;
     -fx-border-color: #334155;
 }
 
-
+/* Tables — column header full dark override */
 .table-view .column-header-background {
     -fx-background-color: #0f172a;
 }
 
-
+/* Each individual column header cell */
 .table-view .column-header {
     -fx-background-color: #0f172a;
     -fx-border-color: transparent transparent #334155 transparent;
     -fx-border-width: 0 0 1 0;
 }
 
-
+/* The label text inside the header */
 .table-view .column-header .label {
     -fx-text-fill: #94a3b8;
     -fx-font-weight: 700;
 }
 
-
+/* The empty filler region on the right side of the header */
 .table-view .column-header-background .filler {
     -fx-background-color: #0f172a;
     -fx-border-color: transparent transparent #334155 transparent;
     -fx-border-width: 0 0 1 0;
 }
 
-
+/* Payroll breakdown panel */
 .breakdown-panel {
     -fx-background-color: #0f172a;
     -fx-background-radius: 8;
 }
 
-
+/* Special Components */
 .result-card {
     -fx-background-color: rgba(99, 102, 241, 0.1);
     -fx-border-color: rgba(99, 102, 241, 0.2);

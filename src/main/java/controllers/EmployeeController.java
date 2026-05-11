@@ -17,15 +17,12 @@ import services.EmployeeService;
 
 public class EmployeeController {
 
-    // Edit form fields
     @FXML private TextField txtName;
     @FXML private TextField txtPosition;
     @FXML private TextField txtSalary;
 
-    // Search field
     @FXML private TextField txtSearch;
 
-    // ID label shown when editing
     @FXML private Label lblCurrentId;
     @FXML private Label lblStatus;
 
@@ -34,22 +31,38 @@ public class EmployeeController {
     @FXML private TableColumn<Employee, String> colName;
     @FXML private TableColumn<Employee, String> colPosition;
     @FXML private TableColumn<Employee, Double> colSalary;
-
+//    Service handle the logic file
     private EmployeeService employeeService;
+//    main list real data
     private ObservableList<Employee> employeeData;
+//    filter version of data ,, what user will sea
     private FilteredList<Employee> filteredData;
+//    select employee in table
     private Employee selectedEmployee = null;
 
+    
+//    initialization run automatically when the screen loads
+    
     @FXML
     public void initialize() {
+//    create service
         employeeService = new EmployeeService();
+//       get all the data from service and wrap them in observable list , we used observableArrayList UI updates automatically when data changes
         employeeData = FXCollections.observableArrayList(employeeService.getAllEmployees());
+        
+//        create filter list
         filteredData = new FilteredList<>(employeeData, p -> true);
 
+//        connect table column with the employee field
+//        important: name must match getters in employee class
+
+// from this column colID , get the value from the id field in employee object
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        
+//     format salary option add comma and dollar sign
         colSalary.setCellFactory(col -> new TableCell<Employee, Double>() {
             @Override
             protected void updateItem(Double item, boolean empty) {
@@ -61,16 +74,33 @@ public class EmployeeController {
                 }
             }
         });
-
+// show filter data in table
         employeeTable.setItems(filteredData);
+
+//        search logic bta3na
+//  ay 7aga user write it gonna be filtered,listener detect any change in the field
         txtSearch.textProperty().addListener((obs, oldVal, newVal) -> {
+//            clean input avoid null and make lowecase
             String filter = newVal == null ? "" : newVal.toLowerCase().trim();
+//            bt3ml filter 
             filteredData.setPredicate(emp -> {
+//                lw mktbsh 7aga show everything
                 if (filter.isEmpty()) return true;
                 return emp.getName().toLowerCase().contains(filter)
                     || emp.getId().toLowerCase().contains(filter);
             });
         });
+
+        // table click for edit , lw el user 3ayz y3ml edit
+//         kol table 3ndo selectionModel , control which row is selected and what happen when 
+//         add listener y3ny run this code when the selected row change
+//         obs is the property itself , oldsel is previsoiuly selected employee , newSel is currently selected employee
+/**
+ * row 1 -> ali 
+ * row 2 -> sara
+ * oldSel = ali
+ * newSel = sara
+ */
         employeeTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
                 selectedEmployee = newSel;
@@ -82,32 +112,31 @@ public class EmployeeController {
         });
     }
 
+//    byft7 new window to add new employee in system 
     @FXML
     private void handleOpenAddDialog() {
         String newId = employeeService.generateNextId();
 
         Stage dialog = new Stage();
         dialog.setTitle("Add New Employee");
+//        block everything l8ayt el employee window close
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.setResizable(false);
-
-      
         TextField nameField = new TextField();
-        nameField.setPromptText("e.g. Jane Doe");
+        nameField.setPromptText("Name");
 
         TextField posField = new TextField();
-        posField.setPromptText("e.g. Software Engineer");
+        posField.setPromptText("Position");
 
         TextField salField = new TextField();
-        salField.setPromptText("e.g. 75000.00");
+        salField.setPromptText("Salary");
 
         Label errorLbl = new Label("");
         errorLbl.setStyle("-fx-text-fill: red; -fx-font-size: 12px;");
 
-        Button saveBtn = new Button("Add Employee");
+        Button saveBtn = new Button("Submit");
         Button cancelBtn = new Button("Cancel");
 
-     
         GridPane grid = new GridPane();
         grid.setHgap(12);
         grid.setVgap(14);
@@ -133,7 +162,7 @@ public class EmployeeController {
             String name     = nameField.getText().trim();
             String position = posField.getText().trim();
             String salText  = salField.getText().trim();
-
+// Validation , user lazm y put all the details
             if (name.isEmpty() || position.isEmpty() || salText.isEmpty()) {
                 errorLbl.setText("All fields are required.");
                 return;
@@ -154,7 +183,6 @@ public class EmployeeController {
         cancelBtn.setOnAction(e -> dialog.close());
 
         Scene dialogScene = new Scene(root);
-        // Inherit theme stylesheets from the main window
         if (employeeTable.getScene() != null) {
             dialogScene.getStylesheets().addAll(employeeTable.getScene().getStylesheets());
         }
@@ -162,6 +190,15 @@ public class EmployeeController {
         dialog.showAndWait();
     }
 
+    
+//    update the employee
+    /**
+     * selected update
+     * read input 
+     * create update service
+     * call service
+     * reload the table again to render it
+     */
     @FXML
     private void handleUpdateEmployee() {
         if (selectedEmployee == null) {
@@ -176,6 +213,8 @@ public class EmployeeController {
 
             Employee updated = new Employee(selectedEmployee.getId(), name, position, salary);
             employeeService.updateEmployee(updated);
+            
+//            this ensure UI is Sync with The File  , setALL Replace all the data
             employeeData.setAll(employeeService.getAllEmployees());
 
             lblStatus.setText("Employee updated!");
@@ -186,12 +225,18 @@ public class EmployeeController {
             lblStatus.setStyle("-fx-text-fill: red;");
         }
     }
-
+// handle the deleted employee
+    /**
+     * get the selected row by user
+     * h call service
+     * h shell the removed row 
+     */
     @FXML
     private void handleDeleteEmployee() {
         Employee selected = employeeTable.getSelectionModel().getSelectedItem();
         if (selected != null) {
             employeeService.deleteEmployee(selected.getId());
+//            ems7 el row
             employeeData.remove(selected);
             lblStatus.setText("Employee " + selected.getId() + " deleted.");
             lblStatus.setStyle("-fx-text-fill: green;");
@@ -202,6 +247,7 @@ public class EmployeeController {
         }
     }
 
+//    clear field , remove selection , reset state 
     @FXML
     private void handleClearForm() {
         txtName.clear();
@@ -209,6 +255,7 @@ public class EmployeeController {
         txtSalary.clear();
         lblCurrentId.setText("");
         selectedEmployee = null;
+//        responsible for the selected Column
         employeeTable.getSelectionModel().clearSelection();
     }
 }

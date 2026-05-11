@@ -1,14 +1,14 @@
-# ERP System
+# JavaFX ERP System
 
 A lightweight, object-oriented Enterprise Resource Planning (ERP) desktop application built with Java, JavaFX, and File-based Data Persistence. This application is designed to manage Employees, track Daily Attendance, and process Payroll cleanly and efficiently.
 
-##  Project Overview
+## 🎯 Project Overview
 
 This project was developed with a strong emphasis on **Clean Code**, **Object-Oriented Programming (OOP) principles**, and **Separation of Concerns**. Instead of relying on a heavy database (like MySQL or SQLite), this application uses custom file-based persistence (reading and writing to `.txt` files) to demonstrate an understanding of core Java I/O and data manipulation.
 
 ---
 
-##  Key Features
+## ✨ Key Features
 
 1. **Interactive Dashboard**: Displays real-time Key Performance Indicators (KPIs), activity summaries, and recent events (like the latest payroll processed or employee added).
 2. **Employee Management**: Add, update, delete, and search employee records. IDs are auto-generated to ensure uniqueness.
@@ -27,7 +27,7 @@ This project was developed with a strong emphasis on **Clean Code**, **Object-Or
 
 ---
 
-## Architecture & Project Structure (MVC Pattern)
+## 🏗️ Architecture & Project Structure (MVC Pattern)
 
 This project strictly follows a modified **Model-View-Controller (MVC)** architectural pattern, expanded with a **Service Layer**. This makes the code highly modular, easy to read, and easy to maintain.
 
@@ -66,7 +66,7 @@ This project strictly follows a modified **Model-View-Controller (MVC)** archite
 
 ---
 
-##  Discussion Guide: "Why separate Controllers and Services?"
+## 🗣️ Discussion Guide: "Why separate Controllers and Services?"
 
 During a code review, your professor may ask: *"Why didn't you just write the file-saving code inside the button click event in the Controller?"*
 
@@ -78,7 +78,7 @@ Here is the professional explanation:
 
 ---
 
-##  File-Based Persistence
+## 💾 File-Based Persistence
 
 To keep the application lightweight and demonstrate Java file I/O streams, data is stored in simple `.txt` files in a Comma-Separated Values (CSV) format.
 
@@ -87,3 +87,10 @@ To keep the application lightweight and demonstrate Java file I/O streams, data 
 * `payroll.txt`: Stores `EmployeeID,Base,Bonus,Deductions,Net`
 
 When the application starts, the Services read these text files, parse the lines back into Java Objects (Models), and load them into memory. When a user adds or edits data, the Service updates the objects in memory and overwrites the text file to save the changes permanently.
+
+---
+
+## 📊 UML Diagrams
+
+Professional architecture diagrams for this system:
+* [Class Diagram (PlantUML)](./CLASS_DIAGRAM.md) - Shows the system structure, relationships, and layered architecture.
