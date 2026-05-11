@@ -4,6 +4,7 @@ This document contains the professional UML Class Diagram for the Employee Manag
 
 ## PlantUML Code
 
+<<<<<<< HEAD
 ```plantuml
 @startuml
 skinparam class {
@@ -297,3 +298,6 @@ These diagrams provide a comprehensive overview of the system:
 2.  **Sequence Diagrams**: Dynamic interaction for core business flows.
 3.  **Use Case Diagram**: High-level functional requirements.
 4.  **Activity Diagram**: Detailed logic flow for complex operations.
+=======
+![Architecture](uml_ERP.png)
+>>>>>>> 2068560250b17581347720c4b482b459e29db304

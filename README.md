@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 # JavaFX ERP System
 
+=======
+# ERP System
+![Architecture](uml_ERP.png)
+>>>>>>> 2068560250b17581347720c4b482b459e29db304
 A lightweight, object-oriented Enterprise Resource Planning (ERP) desktop application built with Java, JavaFX, and File-based Data Persistence. This application is designed to manage Employees, track Daily Attendance, and process Payroll cleanly and efficiently.
 
 ## 🎯 Project Overview
@@ -88,9 +93,12 @@ To keep the application lightweight and demonstrate Java file I/O streams, data 
 
 When the application starts, the Services read these text files, parse the lines back into Java Objects (Models), and load them into memory. When a user adds or edits data, the Service updates the objects in memory and overwrites the text file to save the changes permanently.
 
+<<<<<<< HEAD
 ---
 
 ## 📊 UML Diagrams
 
 Professional architecture diagrams for this system:
 * [Class Diagram (PlantUML)](./CLASS_DIAGRAM.md) - Shows the system structure, relationships, and layered architecture.
+=======
+>>>>>>> 2068560250b17581347720c4b482b459e29db304
